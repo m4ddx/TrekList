@@ -3,13 +3,208 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CheckList เดินป่า (Madd)</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <title>CheckList เดินป่า</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
+    <style>
+      body {
+        font-family: "Prompt", sans-serif;
+        background: radial-gradient(
+          circle,
+          rgba(174, 245, 209, 1) 0%,
+          rgba(148, 187, 233, 1) 100%
+        );
+      }
+      .card {
+        border-radius: 14px;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.4;
+      }
+      .highlight {
+        color: #ff6b00;
+        font-weight: 700;
+      }
+    </style>
+  </head>
   <body>
-    <div class="container">
-      <img src="assets/img01.jpg" alt="Checklist เดินป่า" />
+    <div class="container py-5">
+      <!-- Header -->
+      <header class="text-center mb-5">
+        <h1 class="fw-bold">รวมเส้นทางเดินป่า<br />CheckList</h1>
+        <h2 class="fw-medium mt-3">
+          เส้นทางเดินป่า ประเทศไทย<br />
+          <span class="highlight fs-1">76 เส้นทาง</span>
+        </h2>
+      </header>
+
+      <!-- Layout -->
+      <div class="row g-4" id="checklist-container">
+        <!-- Dynamic cards จะถูกสร้างที่นี่ -->
+      </div>
+
+      <!-- Footer -->
+      <footer class="text-center mt-5 opacity-75">จัดทำโดย Madd</footer>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const data = {
+        north: [
+          { key: 1, value: "ม่อนจอง จ.เชียงใหม่", checked: false },
+          { key: 2, value: "ดอยเชียงดาว จ.เชียงใหม่", checked: false },
+          { key: 3, value: "ดอยผ้าห่มปก จ.เชียงใหม่", checked: false },
+          { key: 4, value: "ดอยหนอก จ.พะเยา", checked: false },
+          { key: 5, value: "ดอยสอยมาลัย จ.ตาก", checked: false },
+          { key: 6, value: "ภูสอยดาว จ.อุตรดิตถ์", checked: true },
+          { key: 7, value: "เขาเย็น 1900 จ.กำแพงเพชร", checked: false },
+          { key: 8, value: "ภูเมี่ยง จ.อุตรดิตถ์", checked: false },
+          { key: 9, value: "เขาหลวงสุโขทัย จ.สุโขทัย", checked: false },
+          { key: 10, value: "โมโกจู จ.กำแพงเพชร", checked: false },
+          { key: 11, value: "ผาแดงหลวง จ.ลำพูน", checked: false },
+          { key: 12, value: "ดอยจง จ.ลำปาง", checked: false },
+          { key: 13, value: "ดอยจิกจ้องฆ้องคำ จ.ลำปาง", checked: false },
+          { key: 14, value: "ดอยขุนตาล จ.ลำปาง", checked: true },
+          { key: 15, value: "ดอยภูแว จ.น่าน", checked: false },
+          { key: 16, value: "ดอยธง จ.แม่ฮองสอน", checked: false },
+          { key: 17, value: "แม่เงา จ.แม่ฮองสอน", checked: false },
+          { key: 18, value: "ดอยมด จ.เชียงราย", checked: false },
+          { key: 19, value: "ดอยลังกาหลวง จ.เชียงใหม่", checked: false },
+          { key: 20, value: "ดอยปุยหลวง จ.แม่ฮองสอน", checked: false },
+          { key: 21, value: "ดอยเวียงผา จ.เชียงใหม่", checked: false },
+          { key: 22, value: "ดอยหัวหมด จ.ตาก", checked: false },
+          { key: 23, value: "เลอกวาเดาะ จ.ตาก", checked: false },
+          { key: 24, value: "ดอยหลวงตาก จ.ตาก", checked: false },
+          { key: 25, value: "แม่ละเมา จ.ตาก", checked: false },
+          { key: 26, value: "ม่อนสี่สหาย จ.ตาก", checked: false },
+          { key: 27, value: "ดอยมะม่วงสามหมื่น จ.ตาก", checked: false },
+          { key: 28, value: "เขาสันแอ่น จ.ตาก", checked: false },
+          { key: 29, value: "ดอยทูเล จ.ตาก", checked: false },
+          { key: 30, value: "ดอยห้วยทู้ จ.ตาก", checked: false },
+          { key: 31, value: "ดอยมณฑา จ.ตาก", checked: false },
+          { key: 32, value: "เขาขนุน จ.กำแพงเพชร", checked: false },
+          { key: 33, value: "ม่อนกองข้าว จ.แม่ฮองสอน", checked: false },
+          { key: 34, value: "หงอนไก่–เลโจ๊ะ จ.แม่ฮองสอน", checked: false },
+          { key: 35, value: "เด่นช้างนอน จ.น่าน", checked: false },
+        ],
+        central: [
+          { key: 1, value: "เขาเทวดา จ.สุพรรณบุรี", checked: false },
+          { key: 2, value: "เขาช้างเผือก จ.กาญจนบุรี", checked: false },
+          { key: 3, value: "สันหนอกวัว จ.กาญจนบุรี", checked: false },
+          { key: 4, value: "น้ำตกผาแตก จ.กาญจนบุรี", checked: false },
+          { key: 5, value: "ลำคลองงู จ.กาญจนบุรี", checked: false },
+          { key: 6, value: "เขากำแพง จ.กาญจนบุรี", checked: false },
+        ],
+        south: [
+          { key: 1, value: "คลองยัน จ.สุราษฎร์ธานี", checked: false },
+          { key: 2, value: "ล่องแพพะโต๊ะ จ.ชุมพร", checked: false },
+          { key: 3, value: "คลองแสง จ.สุราษฎร์ธานี", checked: false },
+          { key: 4, value: "เขาล้อน จ.พัทลุง", checked: false },
+          { key: 5, value: "เขาหัวแหวน จ.ระนอง", checked: false },
+          { key: 6, value: "สันเย็น จ.สุราษฎร์ธานี", checked: false },
+          { key: 7, value: "เขาหลัก จ.พัทลุง", checked: false },
+          { key: 8, value: "เขาพับเพิง จ.สตูล", checked: false },
+          {
+            key: 9,
+            value: "เขาหลวงสันเครื่องบินตก จ.นครศรีธรรมราช",
+            checked: false,
+          },
+          { key: 10, value: "เขาหลวงยอดฝามี จ.นครศรีธรรมราช", checked: false },
+          { key: 11, value: "เขาหลวงยอด 1800 จ.นครศรีธรรมราช", checked: false },
+          { key: 12, value: "วังหีบ จ.นครศรีธรรมราช", checked: false },
+          { key: 13, value: "ฮาลา-บาลา จ.นราธิวาส", checked: false },
+          { key: 14, value: "น้ำตกโตนงาช้าง จ.สงขลา", checked: false },
+          { key: 15, value: "เขาพนมเบญจา จ.กระบี่", checked: false },
+          { key: 16, value: "เขาหนอง จ.สุราษฎร์ธานี", checked: false },
+          { key: 17, value: "เขานัน จ.นครศรีธรรมราช", checked: false },
+          { key: 18, value: "เขาเจ็ดยอด จ.พัทลุง", checked: false },
+          { key: 19, value: "เขาน้ำค้าง-น้ำพุร้อน จ.ระนอง", checked: false },
+          { key: 20, value: "เขาพ่อตามังเคร จ.ชุมพร", checked: false },
+          { key: 21, value: "เขาเหมน จ.นครศรีธรรมราช", checked: false },
+          { key: 22, value: "เขาหลวง จ.ประจวบคีรีขันธ์", checked: false },
+          { key: 23, value: "เขาวงแหวน จ.สุราษฎร์ธานี", checked: false },
+          { key: 24, value: "ยอดตาฝัน จ.นครศรีธรรมราช", checked: false },
+          { key: 25, value: "น้ำตกหนามญี่ปุ่น จ.พัทลุง", checked: false },
+          { key: 26, value: "ยอดสองนม จ.นครศรีธรรมราช", checked: false },
+          { key: 27, value: "เหมืองโชน จ.สุราษฎร์ธานี", checked: false },
+          { key: 28, value: "เขาฟอกฟืม จ.พัทลุง-ตรัง", checked: false },
+          { key: 29, value: "เขาหงอนนาค จ.กระบี่", checked: false },
+          { key: 30, value: "น้ำตกคลองพา จ.สุราษฎร์ธานี", checked: false },
+          { key: 31, value: "เขาตาโชงโดง จ.ระนอง", checked: false },
+          { key: 32, value: "น้ำตกทรายขาว จ.ปัตตานี", checked: false },
+          { key: 33, value: "น้ำตกสายรุ้งละอองดาว จ.ระนอง", checked: false },
+        ],
+
+        northeast: [
+          { key: 1, value: "ภูกระดึง จ.เลย", checked: false },
+          { key: 2, value: "ภูหลวง จ.เลย", checked: false },
+        ],
+      };
+
+      const container = document.getElementById("checklist-container");
+
+      for (const [region, items] of Object.entries(data)) {
+        const col = document.createElement("div");
+        col.className = "col-md-6 col-lg-3"; // 4 columns
+
+        const card = document.createElement("div");
+        card.className = "card shadow-sm p-3";
+
+        const title = document.createElement("h3");
+        title.className = "text-success fw-bold mb-3";
+        // แสดงชื่อภาคแบบภาษาไทย
+        const regionNames = {
+          north: "ภาคเหนือ",
+          central: "ภาคกลาง",
+          south: "ภาคใต้",
+          northeast: "ภาคตะวันออกเฉียงเหนือ",
+        };
+        title.textContent = `${regionNames[region] || region} ${
+          items.length
+        } เส้นทาง`;
+        card.appendChild(title);
+
+        const ul = document.createElement("ul");
+        ul.className = "list-group list-group-flush";
+
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "list-group-item d-flex align-items-center";
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = item.checked;
+          checkbox.disabled = true;
+          checkbox.className = "form-check-input  me-2";
+          checkbox.style.borderRadius = "8px";
+
+          if (checkbox.checked) {
+            checkbox.style.background = "#198754";
+            checkbox.style.opacity = 1;
+            checkbox.style.border = "none";
+          }
+
+          li.appendChild(checkbox);
+          li.appendChild(document.createTextNode(item.value));
+          ul.appendChild(li);
+        });
+
+        card.appendChild(ul);
+        col.appendChild(card);
+        container.appendChild(col);
+      }
+    </script>
   </body>
 </html>
