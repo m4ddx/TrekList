@@ -35,6 +35,10 @@
         color: #ff6b00;
         font-weight: 700;
       }
+      .highlight-success {
+        color: #198754;
+        font-weight: 700;
+      }
     </style>
   </head>
   <body>
@@ -45,6 +49,10 @@
         <h2 class="fw-medium mt-3">
           เส้นทางเดินป่า ประเทศไทย<br />
           <span class="highlight fs-1">76 เส้นทาง</span>
+          <br />
+          <span class="highlight-success fs-1" id="completed-count"
+            >พิชิตแล้ว 0 เส้นทาง</span
+          >
         </h2>
       </header>
 
@@ -204,6 +212,17 @@
         card.appendChild(ul);
         col.appendChild(card);
         container.appendChild(col);
+
+        // คำนวณจำนวนเส้นทางที่ checked เป็น true
+        let completed = 0;
+        for (const items of Object.values(data)) {
+          completed += items.filter((item) => item.checked).length;
+        }
+
+        // อัปเดตจำนวนในหน้า
+        document.getElementById(
+          "completed-count"
+        ).textContent = `พิชิตแล้ว ${completed} เส้นทาง`;
       }
     </script>
   </body>
